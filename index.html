@@ -42,17 +42,16 @@ h1{
 }
 
 img{
-    width:270px;
     border-radius:20px;
-    margin:20px;
 }
 
+/* عداد */
 #counter{
     font-size:22px;
     margin-top:20px;
 }
 
-/* القلوب */
+/* قلوب */
 .heart{
     position:fixed;
     top:-10px;
@@ -61,9 +60,7 @@ img{
 }
 
 @keyframes fall{
-    to{
-        transform:translateY(110vh);
-    }
+    to{ transform:translateY(110vh); }
 }
 
 /* الظرف */
@@ -118,115 +115,266 @@ img{
     transform:translateY(-130px);
     opacity:1;
 }
+
+/* صفحة الصور */
+.photo-block img{
+    width:270px;
+    margin:15px;
+}
+
+/* جاليري */
+.gallery-container{
+    position:relative;
+    width:320px;
+    margin:40px auto;
+}
+
+.slider{
+    width:320px;
+    height:420px;
+    overflow:hidden;
+    border-radius:25px;
+    box-shadow:0 0 25px rgba(255,0,120,0.4);
+}
+
+.slides{
+    display:flex;
+    transition:transform 0.6s ease;
+}
+
+.slides img{
+    width:320px;
+    height:420px;
+    object-fit:cover;
+    cursor:pointer;
+    transition:transform 0.4s;
+}
+
+.slides img:hover{
+    transform:scale(1.05);
+}
+
+.nav-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:#ff4da6;
+    border:none;
+    color:white;
+    font-size:22px;
+    padding:10px 15px;
+    border-radius:50%;
+    cursor:pointer;
+    box-shadow:0 0 15px rgba(255,0,120,0.6);
+}
+
+.prev{ left:-40px; }
+.next{ right:-40px; }
+
+/* مودال */
+.modal{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.85);
+    justify-content:center;
+    align-items:center;
+}
+
+.modal img{
+    width:80%;
+    max-width:500px;
+    border-radius:20px;
+    box-shadow:0 0 30px pink;
+}
 </style>
 </head>
 
 <body>
 
+<!-- ناف -->
 <nav>
 <button onclick="showSection('home')">الرئيسية</button>
-<button onclick="showSection('photo')">أول صورة</button>
+<button onclick="showSection('photo')">ذكريات خاصة</button>
+<button onclick="showSection('gallery')">أجمل لحظاتنا</button>
 <button onclick="showSection('song')">أغنيتنا</button>
 </nav>
 
-<!-- الصفحة الرئيسية -->
+<!-- الرئيسية -->
 <div id="home" class="section active">
 <h1>Our Love Story 💖</h1>
-<p>كل يوم معاكي هو أحلى يوم</p>
-
+<p>كل يوم معاكي أحلى من اللي قبله</p>
 <div id="counter"></div>
 
 <div class="envelope-container">
     <div class="envelope" onclick="openEnvelope(this)">
         <div class="flap"></div>
         <div class="letter">
-            برغم المشاكل و الخلافات و الخناقات بس انتي هتفضلي أحن قلب في الدنيا  
-            وأقرب حد لروحي  
-            وجودك في حياتي فرق معايا في كل حاجة  
-            بحبك أكتر كل يوم ❤️
+            أنتي أماني وأقرب حد لقلبي  
+            وجودك فرق معايا في كل تفصيلة  
+            بحبك قد الدنيا كلها ❤️
         </div>
     </div>
 </div>
 </div>
 
-<!-- صفحة أول صورة -->
-<div id="photo" class="section">
-<h1>أول صورة لينا سوا 📸</h1>
+<!-- الصور الأولى واليوم اللي قولتلها بحبك -->
+<div id="photo" class="section photo-block">
+<h1>ذكريات غيرت حياتي 📸</h1>
+
+<h2>أول صورة لينا</h2>
 <img src="firstphoto.jpg">
-<p>هنا بدأت أحلى قصة في حياتي</p>
+<p>من هنا بدأت الحكاية</p>
+
+<h2>اليوم اللي قولتلك فيه بحبك</h2>
+<img src="iloveyouday.jpg">
+<p>أجمل قرار أخدته في حياتي</p>
+
 </div>
 
-<!-- صفحة الأغنية -->
+<!-- جاليري -->
+<div id="gallery" class="section">
+<h1>أجمل لحظاتنا 💕</h1>
+
+<div class="gallery-container">
+
+<button class="nav-btn prev" onclick="prevSlide()">❮</button>
+
+<div class="slider">
+<div class="slides" id="slides">
+<img src="memory1.jpg" onclick="openModal(this)">
+<img src="memory2.jpg" onclick="openModal(this)">
+<img src="memory3.jpg" onclick="openModal(this)">
+<img src="memory4.jpg" onclick="openModal(this)">
+</div>
+</div>
+
+<button class="nav-btn next" onclick="nextSlide()">❯</button>
+
+</div>
+</div>
+
+<!-- صفحة الأغاني -->
 <div id="song" class="section">
-<h1>أغنيتنا 🎶</h1>
-<audio controls autoplay loop>
-<source src="song.mp3" type="audio/mpeg">
+<h1>أغنيتنا الخاصة 🎶</h1>
+
+<!-- Background autoplay -->
+<audio id="bgSong" autoplay loop>
+    <source src="song1.mp3" type="audio/mpeg">
 </audio>
-<p>الأغنية اللي دايمًا بتفكرني بيكي</p>
+
+<p style="font-size:20px; color:#e60073; margin-top:20px;">
+دي أول أغنية بتشتغل أوتوماتيك  
+أكتر حاجة بتفكرني بيكي ❤️
+</p>
+
+<hr style="width:80%; margin:40px auto; border:1px solid #e60073;">
+
+<h2>أغنيتنا اللي كنا نسمعها سوا على أنغامي</h2>
+
+<p style="font-size:18px; margin-bottom:10px;">
+دوسي هنا على الزرار ده ...فاكره الاغنيه دي؟ ❤️
+</p>
+
+<div style="margin-bottom:15px;">
+<!-- استبدل src برابط الأغنية من Embed Anghami -->
+<iframe
+    src="https://play.anghami.com/song/embed/SONG_ID?theme=light"
+    width="300" height="90"
+    frameborder="0"
+    allow="autoplay; encrypted-media">
+</iframe>
+</div>
+
+<button onclick="playAnghami()" style="padding:10px 20px; font-size:18px; background:#e60073; color:white; border:none; border-radius:10px; cursor:pointer;">
+تشغيل / إيقاف أنغامي
+</button>
+
+</div>
+
+<!-- مودال تكبير الصور -->
+<div id="imageModal" class="modal" onclick="closeModal()">
+<img id="modalImg">
 </div>
 
 <script>
 
-/* تنقل الصفحات */
+/* التنقل بين الصفحات */
 function showSection(id){
-    document.querySelectorAll('.section').forEach(sec=>sec.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-}
-
-/* فتح الظرف */
-function openEnvelope(el){
-    el.classList.toggle("open");
-    burstHearts();
+document.querySelectorAll('.section').forEach(sec=>sec.classList.remove('active'));
+document.getElementById(id).classList.add('active');
 }
 
 /* عداد الحب */
-let startDate = new Date("2024-01-22"); 
-let counter = document.getElementById("counter");
-
+let startDate=new Date("2024-01-22"); 
+let counter=document.getElementById("counter");
 setInterval(()=>{
-    let now = new Date();
-    let diff = now - startDate;
-
-    let days = Math.floor(diff / (1000*60*60*24));
-    let hours = Math.floor((diff / (1000*60*60)) % 24);
-
-    counter.innerHTML = 
-    "عدى " + days + " يوم و " + hours + " ساعة ولسه بنحب بعض أكتر ❤️";
+let now=new Date();
+let diff=now-startDate;
+let days=Math.floor(diff/(1000*60*60*24));
+let hours=Math.floor((diff/(1000*60*60))%24);
+counter.innerHTML="عدى "+days+" يوم و "+hours+" ساعة ولسه بنحب بعض أكتر ❤️";
 },1000);
 
 /* قلوب ساقطة */
 function createHeart(){
-    let heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML="❤";
-    heart.style.left = Math.random()*100+"vw";
-    heart.style.fontSize = Math.random()*20+15+"px";
-    heart.style.animationDuration = Math.random()*3+3+"s";
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),6000);
+let heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="❤";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=Math.random()*20+15+"px";
+heart.style.animationDuration=Math.random()*3+3+"s";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),6000);
 }
 setInterval(createHeart,400);
 
-/* قلوب تطلع عند فتح الظرف */
-function burstHearts(){
-    for(let i=0;i<20;i++){
-        let heart=document.createElement("div");
-        heart.innerHTML="💖";
-        heart.style.position="fixed";
-        heart.style.left="50%";
-        heart.style.top="50%";
-        heart.style.fontSize="20px";
-        heart.style.transition="all 1s";
-        document.body.appendChild(heart);
+/* الظرف */
+function openEnvelope(el){
+el.classList.toggle("open");
+}
 
-        setTimeout(()=>{
-            heart.style.left=(Math.random()*100)+"vw";
-            heart.style.top=(Math.random()*100)+"vh";
-            heart.style.opacity="0";
-        },10);
+/* جاليري */
+let currentIndex=0;
+const slides=document.getElementById("slides");
+const totalSlides=slides.children.length;
 
-        setTimeout(()=>heart.remove(),1000);
-    }
+function updateSlide(){
+slides.style.transform="translateX("+(-320*currentIndex)+"px)";
+}
+
+function nextSlide(){
+currentIndex++;
+if(currentIndex>=totalSlides){currentIndex=0;}
+updateSlide();
+}
+
+function prevSlide(){
+currentIndex--;
+if(currentIndex<0){currentIndex=totalSlides-1;}
+updateSlide();
+}
+
+/* تكبير الصور */
+function openModal(img){
+document.getElementById("imageModal").style.display="flex";
+document.getElementById("modalImg").src=img.src;
+}
+function closeModal(){
+document.getElementById("imageModal").style.display="none";
+}
+
+/* تشغيل / ايقاف أغنية أنغامي */
+function playAnghami(){
+var audio=document.getElementById("bgSong");
+if(!audio.paused){
+audio.pause();
+}else{
+audio.play();
+}
 }
 
 </script>
