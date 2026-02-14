@@ -12,16 +12,14 @@ font-family:Arial;
 background:linear-gradient(135deg,#ffccd5,#ffe6f0);
 text-align:center;
 overflow-x:hidden;
+color:#cc0066;
 }
 
 .section{
 padding:60px 20px;
 }
 
-h1{
-color:#cc0066;
-}
-
+/* Buttons */
 button{
 padding:10px 20px;
 font-size:18px;
@@ -33,6 +31,7 @@ cursor:pointer;
 margin:10px;
 }
 
+/* Images */
 img{
 max-width:90%;
 border-radius:20px;
@@ -46,7 +45,6 @@ transform:scale(1.05);
 }
 
 /* Envelope */
-
 .envelope{
 width:200px;
 height:120px;
@@ -95,7 +93,6 @@ opacity:1;
 }
 
 /* Gallery */
-
 .memories-slider{
 display:flex;
 gap:20px;
@@ -116,18 +113,42 @@ transition:0.4s;
 transform:scale(1.1);
 }
 
+/* Love Counter */
 .counter{
 font-size:24px;
 color:#cc0066;
 margin-top:20px;
 }
+
+/* Video Section */
+.video-wrapper{
+position:relative;
+max-width:800px;
+margin:0 auto;
+background:#000;
+padding:20px;
+border-radius:20px;
+box-shadow:0 0 20px rgba(0,0,0,0.5);
+opacity:0;
+transition:opacity 1s ease-in-out;
+}
+
+.video-wrapper.show{
+opacity:1;
+}
+
+video{
+width:100%;
+border-radius:10px;
+}
+
 </style>
 </head>
 
 <body>
 
 <!-- Background Song -->
-<audio autoplay loop>
+<audio id="bgAudio" autoplay loop>
 <source src="Amr Diab - Khalik Maaya _ عمرو دياب - خليك معايا(MP3_160K).mp3" type="audio/mpeg">
 </audio>
 
@@ -138,32 +159,29 @@ margin-top:20px;
 
 <div class="section">
 <h1>أول صورة لينا</h1>
-<img src="20240828_225632_IMG_7400.HEIC">
+<img src="1000421320.jpg">
 </div>
 
 <div class="section">
 <h1>اليوم اللي قولتلك فيه بحبك</h1>
-<img src="20250122_210138_IMG_1492.HEIC">
+<img src="1000421321.jpg">
 </div>
 
 <div class="section">
 <h1>ذكرياتنا الحلوة</h1>
-
 <div class="memories-slider">
-<img src="20250210_140037_IMG_1811.HEIC" class="memory">
-<img src="20250216_161106_IMG_1987.HEIC" class="memory">
-<img src="20250222_181243_IMG_2160.HEIC" class="memory">
 <img src="IMG-20250502-WA0226.jpg" class="memory">
-<img src="IMG-20260108-WA0010.jpg" class="memory">
-<img src="Snapchat-1286199120.jpg" class="memory">
 <img src="Snapchat-1744675584.jpg" class="memory">
+<img src="Snapchat-1286199120.jpg" class="memory">
+<img src="IMG-20260108-WA0010.jpg" class="memory">
+<img src="1000421612.jpg" class="memory">
+<img src="1000421613.jpg" class="memory">
+<img src="1000421614.jpg" class="memory">
 </div>
-
 </div>
 
 <div class="section">
 <h1>رسالة ليكي</h1>
-
 <div class="envelope" onclick="openEnvelope(this)">
 <div class="letter">
 من يوم 22 يناير 2024  
@@ -171,7 +189,19 @@ margin-top:20px;
 وكل يوم بحبك أكتر من اللي قبله ❤️
 </div>
 </div>
+</div>
 
+<div class="section">
+<h1>أغنيتنا بالفيديو 🎶</h1>
+<p>دي أكتر أغنية كنا بنسمعها أول ما ارتبطنا وكل مرة بتفكرني بأول إحساس بينا ❤️</p>
+
+<div class="video-wrapper" id="videoWrapper">
+<video id="loveVideo" controls>
+<source src="Mohamed Mounir - Men Gheir Kosouf _ محمد منير - من غير كسوف(720P_HD).mp4" type="video/mp4">
+</video>
+</div>
+
+<button onclick="playSecondSong()">تشغيل / إيقاف الفيديو</button>
 </div>
 
 <div class="section">
@@ -197,7 +227,6 @@ slider.scrollLeft = 0;
 
 /* Love Counter */
 const startDate = new Date("2024-01-22");
-
 function updateCounter(){
 const now = new Date();
 const diff = now - startDate;
@@ -205,9 +234,25 @@ const days = Math.floor(diff / (1000*60*60*24));
 document.getElementById("loveCounter").innerHTML =
 days + " يوم مع بعض ❤️";
 }
-
 updateCounter();
 setInterval(updateCounter,1000);
+
+/* Video Control */
+const bgAudio = document.getElementById("bgAudio");
+const loveVideo = document.getElementById("loveVideo");
+const videoWrapper = document.getElementById("videoWrapper");
+
+function playSecondSong(){
+if(loveVideo.paused){
+bgAudio.pause();
+loveVideo.play();
+videoWrapper.classList.add("show");
+}else{
+loveVideo.pause();
+bgAudio.play();
+videoWrapper.classList.remove("show");
+}
+}
 
 </script>
 
