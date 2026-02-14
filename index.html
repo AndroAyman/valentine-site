@@ -295,26 +295,26 @@ line-height:1.5;
 
 /* Envelope */
 function openEnvelope(el){
-el.classList.toggle("open");
+  el.classList.toggle("open");
 }
 
 /* Auto Scroll Gallery for Memories */
 const slider = document.querySelector('.memories-slider');
 setInterval(()=>{
-slider.scrollLeft += 300;
-if(slider.scrollLeft >= slider.scrollWidth - slider.clientWidth){
-slider.scrollLeft = 0;
-}
+  slider.scrollLeft += 300;
+  if(slider.scrollLeft >= slider.scrollWidth - slider.clientWidth){
+    slider.scrollLeft = 0;
+  }
 },2500);
 
 /* Love Counter */
 const startDate = new Date("2025-01-22");
 function updateCounter(){
-const now = new Date();
-const diff = now - startDate;
-const days = Math.floor(diff / (1000*60*60*24));
-document.getElementById("loveCounter").innerHTML =
-days + " يوم مع بعض ❤️";
+  const now = new Date();
+  const diff = now - startDate;
+  const days = Math.floor(diff / (1000*60*60*24));
+  document.getElementById("loveCounter").innerHTML =
+    days + " يوم مع بعض ❤️";
 }
 updateCounter();
 setInterval(updateCounter,1000);
@@ -325,31 +325,30 @@ const loveVideo = document.getElementById("loveVideo");
 const videoWrapper = document.getElementById("videoWrapper");
 
 function playSecondSong(){
-if(loveVideo.paused){
-bgAudio.pause();
-loveVideo.play();
-videoWrapper.classList.add("show");
-}else{
-loveVideo.pause();
-bgAudio.play();
-videoWrapper.classList.remove("show");
-}
+  if(loveVideo.paused){
+    bgAudio.pause();
+    loveVideo.play();
+    videoWrapper.classList.add("show");
+  }else{
+    loveVideo.pause();
+    bgAudio.play();
+    videoWrapper.classList.remove("show");
+  }
 }
 
 /* Falling Hearts Animation */
 const heartsContainer = document.getElementById("heartsContainer");
 
 function createHeart(){
-const heart = document.createElement("div");
-heart.classList.add("heart");
-heart.style.left = Math.random() * window.innerWidth + "px";
-heartsContainer.appendChild(heart);
-setTimeout(()=>{heartsContainer.removeChild(heart)},5000);
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.style.left = Math.random() * window.innerWidth + "px";
+  heartsContainer.appendChild(heart);
+  setTimeout(()=>{heartsContainer.removeChild(heart)},5000);
 }
-
 setInterval(createHeart,500);
 
-const bgAudio = document.getElementById("bgAudio");
+/* Play / Pause Background Audio Button */
 const playAudioBtn = document.getElementById("playAudioBtn");
 
 playAudioBtn.addEventListener("click", ()=>{
