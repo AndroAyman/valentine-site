@@ -30,7 +30,6 @@ margin:10px;
 
 /* Images */
 img{
-max-width:90%;
 border-radius:20px;
 margin-top:20px;
 transition:0.4s;
@@ -72,7 +71,7 @@ opacity:1;
 width:250px;
 height:150px;
 background:#ff4d88;
-margin:40px auto;
+margin:40px auto 60px auto;
 position:relative;
 cursor:pointer;
 border-radius:10px;
@@ -136,11 +135,11 @@ background:#e60073;
 border-radius:5px;
 }
 
-/* Memory images */
+/* Memory images larger */
 .memory{
 flex-shrink:0;
-width:250px;
-height:320px;
+width:300px;
+height:400px;
 object-fit:cover;
 border-radius:20px;
 transition:0.4s;
@@ -203,6 +202,11 @@ line-height:1.5;
 </head>
 
 <body>
+
+<!-- Title Above Envelope -->
+<div class="section">
+<h1>To Tantona ❤️🎀</h1>
+</div>
 
 <!-- Envelope First -->
 <div class="section">
@@ -293,7 +297,7 @@ el.classList.toggle("open");
 /* Auto Scroll Gallery for Memories */
 const slider = document.querySelector('.memories-slider');
 setInterval(()=>{
-slider.scrollLeft += 270;
+slider.scrollLeft += 300;
 if(slider.scrollLeft >= slider.scrollWidth - slider.clientWidth){
 slider.scrollLeft = 0;
 }
