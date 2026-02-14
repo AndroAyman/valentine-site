@@ -220,8 +220,13 @@ line-height:1.5;
 </div>
 </div>
 
+<!-- زر تشغيل الأغنية -->
+<div class="section">
+<button id="playAudioBtn">شغّل / أوقف الأغنية</button>
+</div>
+
 <!-- Background Song -->
-<audio id="bgAudio" autoplay loop>
+<audio id="bgAudio" loop>
 <source src="Amr Diab - Khalik Maaya _ عمرو دياب - خليك معايا(MP3_160K).mp3" type="audio/mpeg">
 </audio>
 
@@ -344,6 +349,19 @@ setTimeout(()=>{heartsContainer.removeChild(heart)},5000);
 }
 
 setInterval(createHeart,500);
+
+const bgAudio = document.getElementById("bgAudio");
+const playAudioBtn = document.getElementById("playAudioBtn");
+
+playAudioBtn.addEventListener("click", ()=>{
+  if(bgAudio.paused){
+    bgAudio.play();
+    playAudioBtn.innerText = "أوقف الأغنية";
+  } else {
+    bgAudio.pause();
+    playAudioBtn.innerText = "شغّل الأغنية";
+  }
+});
 
 </script>
 
