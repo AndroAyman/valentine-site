@@ -14,15 +14,6 @@ text-align:center;
 overflow-x:hidden;
 color:#cc0066;
 position:relative;
-height:100vh;
-}
-
-/* Header Name */
-.header-name{
-font-size:36px;
-font-weight:bold;
-margin:20px 0;
-color:#e60073;
 }
 
 /* Buttons */
@@ -139,11 +130,6 @@ height:320px;
 object-fit:cover;
 border-radius:20px;
 transition:0.4s;
-position:relative;
-}
-
-.memory:hover{
-transform:scale(1.1);
 }
 
 /* Love Counter */
@@ -192,7 +178,7 @@ animation:fall 5s linear forwards;
 100% {transform:translateY(100vh) scale(1.5);}
 }
 
-/* Custom Message */
+/* Custom Message at Bottom */
 .custom-message{
 font-size:20px;
 margin:30px 10px;
@@ -204,21 +190,14 @@ line-height:1.5;
 
 <body>
 
-<!-- Header -->
-<div class="header-name">To Tantonty ❤️🎀</div>
-
 <!-- Background Song -->
 <audio id="bgAudio" autoplay loop>
 <source src="Amr Diab - Khalik Maaya _ عمرو دياب - خليك معايا(MP3_160K).mp3" type="audio/mpeg">
 </audio>
 
-<!-- Custom Message from Andy -->
-<div class="custom-message">
-أنا Andy  
-برغم المشاكل والخلافات اللي بينا  
-بس انتي دايما هتفضلي حبي الأول والأخير  
-وأطيب وأقرب حد لقلبي ولحضني ❤️  
-بحبك يا أحلي تنتونه في الدنيا 🎀
+<div class="section">
+<h1>بحبك يا أجمل حاجة في حياتي ❤️</h1>
+<p>الموقع ده معمول مخصوص عشانك</p>
 </div>
 
 <div class="section">
@@ -277,6 +256,15 @@ line-height:1.5;
 <div class="section">
 <h1>عدّاد حبنا</h1>
 <div class="counter" id="loveCounter"></div>
+</div>
+
+<!-- Custom Message from Andy at Bottom -->
+<div class="custom-message">
+From Andy  
+برغم المشاكل والخلافات اللي بينا  
+بس انتي دايما هتفضلي حبي الأول والأخير  
+وأطيب وأقرب حد لقلبي ولحضني ❤️  
+بحبك يا أحلي تنتونه في الدنيا 🎀
 </div>
 
 <div id="heartsContainer"></div>
