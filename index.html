@@ -13,10 +13,16 @@ background:linear-gradient(135deg,#ffccd5,#ffe6f0);
 text-align:center;
 overflow-x:hidden;
 color:#cc0066;
+position:relative;
+height:100vh;
 }
 
-.section{
-padding:60px 20px;
+/* Header Name */
+.header-name{
+font-size:36px;
+font-weight:bold;
+margin:20px 0;
+color:#e60073;
 }
 
 /* Buttons */
@@ -38,10 +44,36 @@ border-radius:20px;
 margin-top:20px;
 transition:0.4s;
 cursor:pointer;
+position:relative;
 }
 
 img:hover{
 transform:scale(1.05);
+}
+
+/* Heart on hover */
+.img-heart-container{
+position:relative;
+display:inline-block;
+}
+
+.img-heart-container .hover-heart{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%, -50%) scale(0);
+width:40px;
+height:40px;
+background:red;
+clip-path:polygon(50% 0%, 61% 8%, 68% 21%, 68% 35%, 61% 50%, 50% 60%, 39% 50%, 32% 35%, 32% 21%, 39% 8%);
+opacity:0.8;
+pointer-events:none;
+transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.img-heart-container:hover .hover-heart{
+transform:translate(-50%, -50%) scale(1);
+opacity:1;
 }
 
 /* Envelope */
@@ -107,6 +139,7 @@ height:320px;
 object-fit:cover;
 border-radius:20px;
 transition:0.4s;
+position:relative;
 }
 
 .memory:hover{
@@ -142,41 +175,78 @@ width:100%;
 border-radius:10px;
 }
 
+/* Falling Hearts Animation */
+.heart{
+position:absolute;
+width:30px;
+height:30px;
+background:red;
+clip-path:polygon(50% 0%, 61% 8%, 68% 21%, 68% 35%, 61% 50%, 50% 60%, 39% 50%, 32% 35%, 32% 21%, 39% 8%);
+opacity:0.8;
+pointer-events:none;
+animation:fall 5s linear forwards;
+}
+
+@keyframes fall{
+0% {transform:translateY(0) scale(1);}
+100% {transform:translateY(100vh) scale(1.5);}
+}
+
+/* Custom Message */
+.custom-message{
+font-size:20px;
+margin:30px 10px;
+color:#e60073;
+line-height:1.5;
+}
 </style>
 </head>
 
 <body>
+
+<!-- Header -->
+<div class="header-name">To Tantonty ❤️🎀</div>
 
 <!-- Background Song -->
 <audio id="bgAudio" autoplay loop>
 <source src="Amr Diab - Khalik Maaya _ عمرو دياب - خليك معايا(MP3_160K).mp3" type="audio/mpeg">
 </audio>
 
-<div class="section">
-<h1>بحبك يا أجمل حاجة في حياتي ❤️</h1>
-<p>الموقع ده معمول مخصوص عشانك</p>
+<!-- Custom Message from Andy -->
+<div class="custom-message">
+أنا Andy  
+برغم المشاكل والخلافات اللي بينا  
+بس انتي دايما هتفضلي حبي الأول والأخير  
+وأطيب وأقرب حد لقلبي ولحضني ❤️  
+بحبك يا أحلي تنتونه في الدنيا 🎀
 </div>
 
 <div class="section">
 <h1>أول صورة لينا</h1>
+<div class="img-heart-container">
 <img src="1000421320.jpg">
+<div class="hover-heart"></div>
+</div>
 </div>
 
 <div class="section">
 <h1>اليوم اللي قولتلك فيه بحبك</h1>
+<div class="img-heart-container">
 <img src="1000421321.jpg">
+<div class="hover-heart"></div>
+</div>
 </div>
 
 <div class="section">
 <h1>ذكرياتنا الحلوة</h1>
 <div class="memories-slider">
-<img src="IMG-20250502-WA0226.jpg" class="memory">
-<img src="Snapchat-1744675584.jpg" class="memory">
-<img src="Snapchat-1286199120.jpg" class="memory">
-<img src="IMG-20260108-WA0010.jpg" class="memory">
-<img src="1000421612.jpg" class="memory">
-<img src="1000421613.jpg" class="memory">
-<img src="1000421614.jpg" class="memory">
+<div class="img-heart-container"><img src="IMG-20250502-WA0226.jpg" class="memory"><div class="hover-heart"></div></div>
+<div class="img-heart-container"><img src="Snapchat-1744675584.jpg" class="memory"><div class="hover-heart"></div></div>
+<div class="img-heart-container"><img src="Snapchat-1286199120.jpg" class="memory"><div class="hover-heart"></div></div>
+<div class="img-heart-container"><img src="IMG-20260108-WA0010.jpg" class="memory"><div class="hover-heart"></div></div>
+<div class="img-heart-container"><img src="1000421612.jpg" class="memory"><div class="hover-heart"></div></div>
+<div class="img-heart-container"><img src="1000421613.jpg" class="memory"><div class="hover-heart"></div></div>
+<div class="img-heart-container"><img src="1000421614.jpg" class="memory"><div class="hover-heart"></div></div>
 </div>
 </div>
 
@@ -208,6 +278,8 @@ border-radius:10px;
 <h1>عدّاد حبنا</h1>
 <div class="counter" id="loveCounter"></div>
 </div>
+
+<div id="heartsContainer"></div>
 
 <script>
 
@@ -253,6 +325,20 @@ bgAudio.play();
 videoWrapper.classList.remove("show");
 }
 }
+
+/* Falling Hearts Animation */
+const heartsContainer = document.getElementById("heartsContainer");
+
+function createHeart(){
+const heart = document.createElement("div");
+heart.classList.add("heart");
+heart.style.left = Math.random() * window.innerWidth + "px";
+heartsContainer.appendChild(heart);
+setTimeout(()=>{heartsContainer.removeChild(heart)},5000);
+}
+
+// مجموعة قلوب تظهر كل نص ثانية
+setInterval(createHeart,500);
 
 </script>
 
