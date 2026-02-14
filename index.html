@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>Our Valentine ❤️</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:linear-gradient(to bottom,#ffe6f2,#fff);
+    text-align:center;
+    overflow-x:hidden;
+}
+
+nav{
+    background:#ff4da6;
+    padding:15px;
+}
+
+nav button{
+    background:white;
+    border:none;
+    padding:10px 18px;
+    margin:5px;
+    border-radius:20px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.section{
+    display:none;
+    padding:40px 20px;
+}
+
+.active{
+    display:block;
+}
+
+h1{
+    color:#e60073;
+}
+
+img{
+    width:270px;
+    border-radius:20px;
+    margin:20px;
+}
+
+#counter{
+    font-size:22px;
+    margin-top:20px;
+}
+
+/* القلوب */
+.heart{
+    position:fixed;
+    top:-10px;
+    color:#ff1a75;
+    animation:fall linear forwards;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh);
+    }
+}
+
+/* الظرف */
+.envelope-container{
+    perspective:1000px;
+    width:230px;
+    margin:40px auto;
+}
+
+.envelope{
+    width:230px;
+    height:150px;
+    background:#ff99cc;
+    position:relative;
+    border-radius:12px;
+    cursor:pointer;
+    box-shadow:0 0 20px rgba(255,0,100,0.4);
+}
+
+.flap{
+    position:absolute;
+    top:0;
+    left:0;
+    width:0;
+    height:0;
+    border-left:115px solid transparent;
+    border-right:115px solid transparent;
+    border-bottom:75px solid #ff66b2;
+    transform-origin:top;
+    transition:transform 0.8s;
+}
+
+.envelope.open .flap{
+    transform:rotateX(180deg);
+}
+
+.letter{
+    background:white;
+    width:210px;
+    padding:20px;
+    border-radius:12px;
+    position:absolute;
+    top:30px;
+    left:10px;
+    transform:translateY(50px);
+    opacity:0;
+    transition:all 1s;
+    font-size:18px;
+}
+
+.envelope.open .letter{
+    transform:translateY(-130px);
+    opacity:1;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<button onclick="showSection('home')">الرئيسية</button>
+<button onclick="showSection('photo')">أول صورة</button>
+<button onclick="showSection('song')">أغنيتنا</button>
+</nav>
+
+<!-- الصفحة الرئيسية -->
+<div id="home" class="section active">
+<h1>Our Love Story 💖</h1>
+<p>كل يوم معاكي هو أحلى يوم</p>
+
+<div id="counter"></div>
+
+<div class="envelope-container">
+    <div class="envelope" onclick="openEnvelope(this)">
+        <div class="flap"></div>
+        <div class="letter">
+            برغم المشاكل و الخلافات و الخناقات بس انتي هتفضلي أحن قلب في الدنيا  
+            وأقرب حد لروحي  
+            وجودك في حياتي فرق معايا في كل حاجة  
+            بحبك أكتر كل يوم ❤️
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- صفحة أول صورة -->
+<div id="photo" class="section">
+<h1>أول صورة لينا سوا 📸</h1>
+<img src="firstphoto.jpg">
+<p>هنا بدأت أحلى قصة في حياتي</p>
+</div>
+
+<!-- صفحة الأغنية -->
+<div id="song" class="section">
+<h1>أغنيتنا 🎶</h1>
+<audio controls autoplay loop>
+<source src="song.mp3" type="audio/mpeg">
+</audio>
+<p>الأغنية اللي دايمًا بتفكرني بيكي</p>
+</div>
+
+<script>
+
+/* تنقل الصفحات */
+function showSection(id){
+    document.querySelectorAll('.section').forEach(sec=>sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+/* فتح الظرف */
+function openEnvelope(el){
+    el.classList.toggle("open");
+    burstHearts();
+}
+
+/* عداد الحب */
+let startDate = new Date("2024-01-22"); 
+let counter = document.getElementById("counter");
+
+setInterval(()=>{
+    let now = new Date();
+    let diff = now - startDate;
+
+    let days = Math.floor(diff / (1000*60*60*24));
+    let hours = Math.floor((diff / (1000*60*60)) % 24);
+
+    counter.innerHTML = 
+    "عدى " + days + " يوم و " + hours + " ساعة ولسه بنحب بعض أكتر ❤️";
+},1000);
+
+/* قلوب ساقطة */
+function createHeart(){
+    let heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML="❤";
+    heart.style.left = Math.random()*100+"vw";
+    heart.style.fontSize = Math.random()*20+15+"px";
+    heart.style.animationDuration = Math.random()*3+3+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+}
+setInterval(createHeart,400);
+
+/* قلوب تطلع عند فتح الظرف */
+function burstHearts(){
+    for(let i=0;i<20;i++){
+        let heart=document.createElement("div");
+        heart.innerHTML="💖";
+        heart.style.position="fixed";
+        heart.style.left="50%";
+        heart.style.top="50%";
+        heart.style.fontSize="20px";
+        heart.style.transition="all 1s";
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{
+            heart.style.left=(Math.random()*100)+"vw";
+            heart.style.top=(Math.random()*100)+"vh";
+            heart.style.opacity="0";
+        },10);
+
+        setTimeout(()=>heart.remove(),1000);
+    }
+}
+
+</script>
+
+</body>
+</html>
